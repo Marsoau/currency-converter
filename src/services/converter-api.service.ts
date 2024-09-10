@@ -1,7 +1,7 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { lastValueFrom } from "rxjs";
-import { ICurrenciesResponce } from "../interfaces/currencies-responce";
+import { Currency } from "../model/currency";
 
 @Injectable({
   providedIn: "root"
@@ -9,14 +9,29 @@ import { ICurrenciesResponce } from "../interfaces/currencies-responce";
 export class CurrencyAPI {
   private _baseUrl: string;
 
+  public currencies: Currency[];
+
   public constructor(
     private readonly _http: HttpClient
   ) {
     this._baseUrl = "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1";
+
+    this.currencies = [];
+
+    this.GetCurrencies().then((currencies) => {
+      this.currencies = currencies;
+      console.log("currencies loaded");
+      console.log(this.currencies);
+    });
   }
 
   public async GetCurrencies() {
-    let currencies = await this.Get<any>("currencies.min.json");
+    let currenciesResponce = await this.Get<any>("currencies.min.json");
+    let currencies: Currency[] = [];
+
+    for (const [key, value] of Object.entries(currenciesResponce)) {
+      currencies.push(new Currency(value as string, key));
+    }
 
     return currencies;
   }

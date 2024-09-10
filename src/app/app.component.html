@@ -1,1 +1,9 @@
-
+<header>
+  <app-header />
+</header>
+<main>
+  <app-currency-input #firstInput (currencySelected)="updateInput(firstInput, secondInput)"
+    (amountChanged)="updateInput(secondInput, firstInput)" />
+  <app-currency-input #secondInput (currencySelected)="updateInput(secondInput, firstInput)"
+    (amountChanged)="updateInput(firstInput, secondInput)" />
+</main>

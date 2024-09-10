@@ -1,1 +1,6 @@
-<p>currency-input works!</p>
+<select class="currency-select" [(ngModel)]="currencySelectValue" (change)="onCurrencySelect()">
+  @for (currency of api.currencies; track $index) {
+  <option class="currency-option" [value]="currency.iso">{{currency.iso | uppercase}} - {{currency.name}}</option>
+  }
+</select>
+<input class="amount-input" type="number" placeholder="0" [(ngModel)]="amountInputValue" (input)="onAmountInput()" />

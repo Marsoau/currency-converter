@@ -1,0 +1,57 @@
+:host {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  box-shadow: #00000032 0px 4px 10px;
+
+  background-color: white;
+  color: #484848;
+
+  height: 48px;
+}
+
+.title {
+  font-size: 26px;
+  font-weight: 700;
+
+  padding: 6px 9px;
+
+  cursor: pointer;
+}
+
+.right-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.currency-display {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #646464;
+
+  font-size: 18px;
+  font-weight: 500;
+
+  padding: 0px 6px;
+}
+
+.currency-decorator {
+  width: 2px;
+
+  margin: 10px 0px;
+
+  background-color: #646464;
+}
+
+@media only screen and (max-width: 768px) {
+  .title {
+    display: none;
+  }
+
+  :host {
+    justify-content: center;
+  }
+}

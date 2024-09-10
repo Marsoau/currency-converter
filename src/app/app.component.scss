@@ -1,0 +1,10 @@
+main {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+app-currency-input {
+  margin: 8px;
+}
