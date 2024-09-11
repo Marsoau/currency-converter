@@ -3,4 +3,5 @@
   <option class="currency-option" [value]="currency.iso">{{currency.iso | uppercase}} - {{currency.name}}</option>
   }
 </select>
-<input class="amount-input" type="number" placeholder="0" [(ngModel)]="amountInputValue" (input)="onAmountInput()" />
+<input class="amount-input" type="number" placeholder="Amount" [(ngModel)]="amountInputValue"
+  (input)="onAmountInput()" />

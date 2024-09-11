@@ -18,31 +18,32 @@ export class CurrencyInputComponent {
   @Output() public amountChanged = new EventEmitter<number>();
 
   constructor(
-    public readonly api: CurrencyAPI
+    protected readonly api: CurrencyAPI
   ) {
     this.currencySelectValue = "usd";
-    this.amountInputValue = "1.00000";
+    this.amountInputValue = "1";
   }
 
   public get currency() {
     return this.currencySelectValue;
   }
-  public get amount() {
-    let valueNumber = parseInt(this.amountInputValue);
-    if (Number.isNaN(valueNumber)) {
-      valueNumber = 0;
-    }
 
-    return valueNumber;
-  }
-
-  public setCurrency(currencyIso: string) {
+  public set currency(currencyIso: string) {
     this.currencySelectValue = currencyIso;
 
     this.currencySelected.emit(this.currencySelectValue);
   }
 
-  public async setAmount(value: number, fromCurrency: string, triggerUpdateEvent: boolean = true) {
+  public get amount() {
+    let amountNumber = parseFloat(this.amountInputValue);
+    if (Number.isNaN(amountNumber)) {
+      amountNumber = 0;
+    }
+
+    return amountNumber;
+  }
+
+  public async setAmount(value: number, fromCurrency: string, triggerEvent: boolean = true) {
     if (this.currency == fromCurrency) {
       this.amountInputValue = value.toFixed(5);
     }
@@ -52,15 +53,14 @@ export class CurrencyInputComponent {
       this.amountInputValue = convertedAmount.toFixed(5);
     }
 
-    if (triggerUpdateEvent) this.amountChanged.emit(this.amount);
+    if (triggerEvent) this.amountChanged.emit(this.amount);
   }
 
   protected async onCurrencySelect() {
-    console.log("c input");
     this.currencySelected.emit(this.currencySelectValue);
   }
+
   protected async onAmountInput() {
-    console.log("amount input");
     this.amountChanged.emit(this.amount);
   }
 }

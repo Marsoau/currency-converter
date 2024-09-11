@@ -9,11 +9,11 @@ import { CurrencyAPI } from '../../services/converter-api.service';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  usduah: string;
-  euruah: string;
+  protected usduah: string;
+  protected euruah: string;
 
   constructor(
-    readonly api: CurrencyAPI
+    protected readonly api: CurrencyAPI
   ) {
     this.usduah = "";
     this.euruah = "";
